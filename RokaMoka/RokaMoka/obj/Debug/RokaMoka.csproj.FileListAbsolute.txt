@@ -1,0 +1,10 @@
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.exe.config
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.exe
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.pdb
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.AssemblyReference.cache
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.Form1.resources
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.Properties.Resources.resources
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.GenerateResource.cache
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.CoreCompileInputs.cache
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.exe
+C:\Users\piros\Desktop\nyuszirokka\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.pdb
