@@ -1,4 +1,4 @@
 # nyulroka
 Életjáték projekt C#
 
-Csapattagok: Kiss Kinga, Németh Kristóf
+Author: Kiss Kinga, Németh Kristóf
