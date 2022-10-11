@@ -14,18 +14,18 @@ namespace RokaMoka
         int oszlop;
         int magassag;
         int szelesseg;
-        JatekCella[,] matrix;
-        public JatekMatrix(int sorok, int oszlopok, ref Panel panel)
+        JatekCella[,] jmatrix;
+        public JatekMatrix(int sorok, int oszlopok, Panel panel)
         {
             sor = sorok;
             oszlop = oszlopok;
             magassag = panel.Height / sor;
             szelesseg = panel.Width / oszlop;
-            matrix = new JatekCella[sor, oszlop];
-            JatekterGeneralas(ref panel);
+            jmatrix = new JatekCella[sor, oszlop];
+            JatekterGeneralas(panel);
         }
 
-        private void JatekterGeneralas(ref Panel panel)
+        private void JatekterGeneralas(Panel panel)
         {
             for (int n = 0; n < oszlop; n++)
             {
@@ -43,18 +43,31 @@ namespace RokaMoka
                     p.Tag = $"{m}, {n}";
                     p.BorderStyle = BorderStyle.FixedSingle;
 
-                    //placeholder for checking
-                    p.Text = p.Tag.ToString();
+                    //placeholder for checking correct matrix numbers
+                    //p.Text = p.Tag.ToString();
                     p.ForeColor = System.Drawing.Color.Red;
                     p.Font = new System.Drawing.Font("Chiller", 16);
                     p.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-                    matrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(1, 101));
+                    jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(1, 101));
+                    p.Text = jmatrix[m, n].fu.TP.ToString();
 
                     panel.Controls.Add(p);
                 }
             }
         }
 
+        public void ujNap(Panel panel)
+        {
+            foreach (Control p in panel.Controls)
+            {
+                string[] vs = p.Tag.ToString().Trim().Split(',').ToArray();
+                int m = Convert.ToInt32(vs[0]);
+                int n = Convert.ToInt32(vs[1]);
+                jmatrix[m, n].fu.No();
+                p.Text = jmatrix[m, n].fu.TP.ToString();
+            }
+        }
+        
     }
 }

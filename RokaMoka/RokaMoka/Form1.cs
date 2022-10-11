@@ -28,13 +28,14 @@ namespace RokaMoka
             Start.Visible = false;
             sor = Convert.ToInt32(sorok.Value);
             oszlop = Convert.ToInt32(oszlopok.Value);
-            jatekMatrix = new JatekMatrix(sor, oszlop, ref panel);
+            jatekMatrix = new JatekMatrix(sor, oszlop, panel);
             timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = $"{++seconds}";
+            jatekMatrix.ujNap(panel);
         }
     }
 }
