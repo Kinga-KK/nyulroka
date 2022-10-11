@@ -29,6 +29,7 @@ namespace RokaMoka
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.sorok = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,7 @@ namespace RokaMoka
             this.panel = new System.Windows.Forms.Panel();
             this.Start = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.sorok)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.oszlopok)).BeginInit();
             this.panel.SuspendLayout();
@@ -150,6 +152,11 @@ namespace RokaMoka
             this.label3.TabIndex = 3;
             this.label3.Text = "Készítette: Kiss Kinga, Németh Kristóf";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,6 +189,7 @@ namespace RokaMoka
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
