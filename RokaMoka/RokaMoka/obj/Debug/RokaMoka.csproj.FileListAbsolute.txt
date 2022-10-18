@@ -8,3 +8,13 @@ C:\Users\Suli\Desktop\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.Gener
 C:\Users\Suli\Desktop\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.CoreCompileInputs.cache
 C:\Users\Suli\Desktop\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.exe
 C:\Users\Suli\Desktop\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.pdb
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.AssemblyReference.cache
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.Form1.resources
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.Properties.Resources.resources
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.GenerateResource.cache
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.csproj.CoreCompileInputs.cache
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.exe
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\obj\Debug\RokaMoka.pdb
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.exe.config
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.exe
+B:\Other\Quirky\Documents\VStudio Projects\nyulroka\RokaMoka\RokaMoka\bin\Debug\RokaMoka.pdb

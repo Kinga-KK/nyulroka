@@ -9,12 +9,29 @@ namespace RokaMoka
 {
     class JatekCella
     {
-        internal string ptag;
+        internal string ltag;
         internal Fu fu;
+        internal Allat allat;
+        private bool free;
+        private bool isbunny;
+
+
+
+
+
         public JatekCella(string pictureboxtag, int chance)
         {
-            ptag = pictureboxtag;
+            ltag = pictureboxtag;
             fu = new Fu(chance / 50);
+            allat = new Allat(ltag, chance);  //mindenhova garantáltan generál
+            free = false;
         }
+        internal bool Free
+        {
+            get { return free; }
+            set { free = value; }
+        }
+      
+
     }
 }

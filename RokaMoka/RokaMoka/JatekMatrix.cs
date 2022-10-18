@@ -15,8 +15,7 @@ namespace RokaMoka
         int magassag;
         int szelesseg;
         JatekCella[,] jmatrix;
-        List<Nyul> nyulak = new List<Nyul>();
-        List<Roka> rokak = new List<Roka>();
+        List<Allat> nyulak = new List<Allat>();
         public JatekMatrix(int sorok, int oszlopok, Panel panel)
         {
             sor = sorok;

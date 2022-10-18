@@ -45,9 +45,10 @@ namespace RokaMoka
             // sorok
             // 
             this.sorok.BackColor = System.Drawing.Color.Black;
-            this.sorok.Font = new System.Drawing.Font("Chiller", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sorok.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sorok.ForeColor = System.Drawing.Color.Red;
-            this.sorok.Location = new System.Drawing.Point(50, 84);
+            this.sorok.Location = new System.Drawing.Point(67, 103);
+            this.sorok.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sorok.Maximum = new decimal(new int[] {
             50,
             0,
@@ -59,7 +60,7 @@ namespace RokaMoka
             0,
             0});
             this.sorok.Name = "sorok";
-            this.sorok.Size = new System.Drawing.Size(79, 39);
+            this.sorok.Size = new System.Drawing.Size(105, 46);
             this.sorok.TabIndex = 0;
             this.sorok.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.sorok.Value = new decimal(new int[] {
@@ -72,11 +73,12 @@ namespace RokaMoka
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Font = new System.Drawing.Font("Chiller", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(39, 9);
+            this.label1.Location = new System.Drawing.Point(52, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(477, 56);
+            this.label1.Size = new System.Drawing.Size(841, 69);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mekkora játékteret szeretnél?";
             // 
@@ -84,20 +86,22 @@ namespace RokaMoka
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Chiller", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(168, 74);
+            this.label2.Location = new System.Drawing.Point(224, 91);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 56);
+            this.label2.Size = new System.Drawing.Size(71, 69);
             this.label2.TabIndex = 1;
             this.label2.Text = "X";
             // 
             // oszlopok
             // 
             this.oszlopok.BackColor = System.Drawing.Color.Black;
-            this.oszlopok.Font = new System.Drawing.Font("Chiller", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.oszlopok.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.oszlopok.ForeColor = System.Drawing.Color.Red;
-            this.oszlopok.Location = new System.Drawing.Point(241, 84);
+            this.oszlopok.Location = new System.Drawing.Point(321, 103);
+            this.oszlopok.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.oszlopok.Maximum = new decimal(new int[] {
             50,
             0,
@@ -109,7 +113,7 @@ namespace RokaMoka
             0,
             0});
             this.oszlopok.Name = "oszlopok";
-            this.oszlopok.Size = new System.Drawing.Size(79, 39);
+            this.oszlopok.Size = new System.Drawing.Size(105, 46);
             this.oszlopok.TabIndex = 0;
             this.oszlopok.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.oszlopok.Value = new decimal(new int[] {
@@ -120,20 +124,22 @@ namespace RokaMoka
             // 
             // panel
             // 
-            this.panel.Location = new System.Drawing.Point(49, 149);
+            this.panel.Location = new System.Drawing.Point(65, 183);
+            this.panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(855, 260);
+            this.panel.Size = new System.Drawing.Size(1140, 320);
             this.panel.TabIndex = 2;
             // 
             // Start
             // 
             this.Start.BackColor = System.Drawing.Color.Red;
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start.Font = new System.Drawing.Font("Chiller", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Start.ForeColor = System.Drawing.Color.Black;
-            this.Start.Location = new System.Drawing.Point(620, 16);
+            this.Start.Location = new System.Drawing.Point(827, 20);
+            this.Start.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(284, 107);
+            this.Start.Size = new System.Drawing.Size(379, 132);
             this.Start.TabIndex = 0;
             this.Start.Text = "Mehet!";
             this.Start.UseVisualStyleBackColor = false;
@@ -141,12 +147,14 @@ namespace RokaMoka
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Chiller", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(28, 450);
+            this.label3.Location = new System.Drawing.Point(37, 592);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(292, 27);
+            this.label3.Size = new System.Drawing.Size(513, 36);
             this.label3.TabIndex = 3;
             this.label3.Text = "Készítette: Kiss Kinga, Németh Kristóf";
             // 
@@ -157,10 +165,10 @@ namespace RokaMoka
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(946, 486);
+            this.ClientSize = new System.Drawing.Size(1333, 636);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel);
@@ -168,6 +176,7 @@ namespace RokaMoka
             this.Controls.Add(this.label1);
             this.Controls.Add(this.oszlopok);
             this.Controls.Add(this.sorok);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RókaMóka";
