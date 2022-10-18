@@ -33,21 +33,8 @@ namespace RokaMoka
                 {
                     //PictureBox p = new PictureBox();
                     Label p = new Label(); //take out later
-                    p.Height = magassag;
-                    p.Width = szelesseg;
-                    p.Top = magassag * m;
-                    p.Left = szelesseg * n;
-                    //note: ezeket a játékcella osztályban kell talán hm
-                    //p.BackgroundImage = //fűképe
-                    //p.Image = //állatképe
-                    p.Tag = $"{m}, {n}";
-                    p.BorderStyle = BorderStyle.FixedSingle;
 
-                    //placeholder for checking correct matrix numbers
-                    //p.Text = p.Tag.ToString();
-                    p.ForeColor = System.Drawing.Color.Red;
-                    p.Font = new System.Drawing.Font("Chiller", 16);
-                    p.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    tulajdonsagBeallitasok(p, m, n);
 
                     jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(1, 101));
                     p.Text = jmatrix[m, n].fu.TP.ToString();
@@ -55,6 +42,25 @@ namespace RokaMoka
                     panel.Controls.Add(p);
                 }
             }
+        }
+
+        private void tulajdonsagBeallitasok(Label p, int m, int n)
+        {
+            p.Height = magassag;
+            p.Width = szelesseg;
+            p.Top = magassag * m;
+            p.Left = szelesseg * n;
+            //note: ezeket a játékcella osztályban kell majd probably
+            //p.BackgroundImage = //fűképe
+            //p.Image = //állatképe
+            p.Tag = $"{m}, {n}";
+            p.BorderStyle = BorderStyle.FixedSingle;
+
+            //placeholder for checking correct matrix numbers
+            //p.Text = p.Tag.ToString();
+            p.ForeColor = System.Drawing.Color.Red;
+            p.Font = new System.Drawing.Font("Chiller", 16);
+            p.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         }
 
         public void ujNap(Panel panel)

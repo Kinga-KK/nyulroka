@@ -25,7 +25,7 @@ namespace RokaMoka
 
         private void Start_Click(object sender, EventArgs e)
         {
-            Start.Visible = false;
+            elemekElrejtese();
             sor = Convert.ToInt32(sorok.Value);
             oszlop = Convert.ToInt32(oszlopok.Value);
             jatekMatrix = new JatekMatrix(sor, oszlop, panel);
@@ -34,8 +34,16 @@ namespace RokaMoka
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label1.Text = $"{++seconds}";
+            label1.Text = $"Eltelt napok(mp): {++seconds}";
             jatekMatrix.ujNap(panel);
+        }
+
+        private void elemekElrejtese()
+        {
+            Start.Visible = false;
+            oszlopok.Visible = false;
+            sorok.Visible = false;
+            labelX.Visible = false;
         }
     }
 }
