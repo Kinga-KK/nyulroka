@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace RokaMoka
 {
@@ -32,30 +33,37 @@ namespace RokaMoka
             {
                 for (int m = 0; m < sor; m++)
                 {
-                    //PictureBox p = new PictureBox();
-                    Label p = new Label(); //take out later
-                    p.Height = magassag;
-                    p.Width = szelesseg;
-                    p.Top = magassag * m;
-                    p.Left = szelesseg * n;
-                    //note: ezeket a játékcella osztályban kell talán hm
-                    //p.BackgroundImage = //fűképe
-                    //p.Image = //állatképe
-                    p.Tag = $"{m}, {n}";
-                    p.BorderStyle = BorderStyle.FixedSingle;
+                    Label p = new Label();
+                    tulajdonsagokBeallitasa(p, m, n);
+                    jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(0, 99));
+                    p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
 
-                    //placeholder for checking correct matrix numbers
-                    //p.Text = p.Tag.ToString();
-                    p.ForeColor = System.Drawing.Color.Red;
-                    p.Font = new System.Drawing.Font("Chiller", 16);
-                    p.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-                    jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(1, 101));
-                    p.Text = jmatrix[m, n].fu.TP.ToString();
+                    //can put pictures on like this
+                    p.Image = r.Next(0, 2) == 1 ? 
+                        Image.FromFile(@"..\..\img\nyuszi1.png") : 
+                        Image.FromFile(@"..\..\img\roka1.png");
+                    //can clear like this
+                    //p.Image = null;
 
                     panel.Controls.Add(p);
                 }
             }
+        }
+
+        private void tulajdonsagokBeallitasa(Label p, int m, int n)
+        {
+            p.Height = magassag;
+            p.Width = szelesseg;
+            p.Top = magassag * m;
+            p.Left = szelesseg * n;
+            p.Tag = $"{m}, {n}";
+            p.BorderStyle = BorderStyle.FixedSingle;
+            p.ForeColor = System.Drawing.Color.Red;
+            p.Font = new System.Drawing.Font("Chiller", 16);
+            p.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+            //placeholder for checking correct matrix numbers
+            //p.Text = p.Tag.ToString();
         }
 
         public void ujNap(Panel panel)
@@ -66,7 +74,23 @@ namespace RokaMoka
                 int m = Convert.ToInt32(vs[0]);
                 int n = Convert.ToInt32(vs[1]);
                 jmatrix[m, n].fu.No();
-                p.Text = jmatrix[m, n].fu.TP.ToString();
+                p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
+            }
+        }
+
+        private Color fuSzinBeallitas(int tp)
+        {
+            if (tp == 0)
+            {
+                return Color.FromArgb(220, 123, 67);
+            }
+            else if (tp == 1)
+            {
+                return Color.FromArgb(109, 223, 109);
+            }
+            else
+            {
+                return Color.FromArgb(0, 127, 0);
             }
         }
         

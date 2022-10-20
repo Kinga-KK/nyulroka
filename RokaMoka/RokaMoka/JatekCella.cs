@@ -19,6 +19,7 @@ namespace RokaMoka
 
 
 
+
         public JatekCella(string pictureboxtag, int chance)
         {
             ltag = pictureboxtag;
@@ -31,7 +32,6 @@ namespace RokaMoka
             get { return free; }
             set { free = value; }
         }
-      
 
     }
 }

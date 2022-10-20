@@ -9,13 +9,39 @@ namespace RokaMoka
     class Allat
     {
         private int hp;
-        internal int HP;
+        //internal int HP;
         internal bool IsBunny;
         internal string ID;
         internal string ltag;
         private int idseged;
         
+        internal int HP
+        {
+            get 
+            {
+                return hp;
+            } 
+            set
+            {
+                if(IsBunny && value < 5)
+                {
+                    hp = value;
+                }
+                else if(IsBunny)
+                {
+                    hp = 5;
+                }
 
+                if(!IsBunny && value < 10)
+                {
+                    hp = value;
+                }
+                else if(!IsBunny)
+                {
+                    hp = 10;
+                }
+            }
+        }
 
         public Allat(string pictureboxtag, int chance)
         {
