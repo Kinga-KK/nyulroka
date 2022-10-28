@@ -9,8 +9,11 @@ namespace RokaMoka
     class Allat
     {
         private int hp;
-        //internal int HP;
-        internal bool IsBunny;
+        //ő nincsen hozzákötve a hp-hoz, ezért automatikusan legenerál magának egy privát adattagot.
+        //ha nem kéne lekezelni/konstruktorban kezeljük le, akkor lehet sima publikus/internal automatikus tulajdonság
+        // -> internal int HP { get; set; }
+        //internal int HP; 
+        internal bool IsBunny; //todo: ami ezekből tulajdonság az kapjon { get; set; }-et
         internal string ID;
         internal string ltag;
         private int idseged;
@@ -22,23 +25,23 @@ namespace RokaMoka
                 return hp;
             } 
             set
-            {
-                if(IsBunny && value < 5)
-                {
-                    hp = value;
-                }
-                else if(IsBunny)
+            {   //ha nyuszi és 5-nél nagyobb hp-t kapna, akkor csak 5-öt kap, egyébként az értéket 
+                if(IsBunny && value > 5)
                 {
                     hp = 5;
                 }
-
-                if(!IsBunny && value < 10)
+                else if(IsBunny)
                 {
                     hp = value;
                 }
-                else if(!IsBunny)
+                //mint a fenti, csak róka és 10-nél nem lehet nagyobb
+                if(!IsBunny && value > 10)
                 {
                     hp = 10;
+                }
+                else if(!IsBunny)
+                {
+                    hp = value;
                 }
             }
         }
@@ -47,17 +50,18 @@ namespace RokaMoka
         {
             ltag = pictureboxtag;
             IsBunny = (chance - 20) > 0;
+            HP = IsBunny ? 3 : 5;
         }
         internal void IDmkr() //Id maker
         {
             if (IsBunny==true)
             {
-                ID = "B" + idseged;
+                ID = "B" + idseged; //Bunny
                 idseged++;
             }
             else
             {
-                ID = "F" + idseged;
+                ID = "F" + idseged; //Fox
                 idseged++;
             }
         }

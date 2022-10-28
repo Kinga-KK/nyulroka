@@ -25,7 +25,8 @@ namespace RokaMoka
             ltag = pictureboxtag;
             fu = new Fu(chance / 50);
             allat = new Allat(ltag, chance);  //mindenhova garantáltan generál
-            free = false;
+            Free = false;
+            isbunny = allat.IsBunny;
         }
         internal bool Free
         {

@@ -16,7 +16,7 @@ namespace RokaMoka
         int magassag;
         int szelesseg;
         JatekCella[,] jmatrix;
-        List<Allat> nyulak = new List<Allat>();
+        List<Allat> allatok = new List<Allat>();
         public JatekMatrix(int sorok, int oszlopok, Panel panel)
         {
             sor = sorok;
@@ -38,10 +38,18 @@ namespace RokaMoka
                     jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(0, 99));
                     p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
 
-                    //can put pictures on like this
-                    p.Image = r.Next(0, 2) == 1 ? 
-                        Image.FromFile(@"..\..\img\nyuszi1.png") : 
+                    if (!jmatrix[m, n].Free)
+                    {
+                        allatok.Add(jmatrix[m, n].allat);
+                        p.Image = jmatrix[m, n].allat.ID == "B" ?
+                        Image.FromFile(@"..\..\img\nyuszi1.png") :
                         Image.FromFile(@"..\..\img\roka1.png");
+                    }
+
+                    //can put pictures on like this
+                    /* p.Image = r.Next(0, 2) == 1 ? 
+                        Image.FromFile(@"..\..\img\nyuszi1.png") : 
+                        Image.FromFile(@"..\..\img\roka1.png"); */
                     //can clear like this
                     //p.Image = null;
 
