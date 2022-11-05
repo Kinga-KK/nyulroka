@@ -13,20 +13,34 @@ namespace RokaMoka
         internal Fu fu;
         internal Allat allat;
         private bool free;
-        private bool isbunny;
+        internal string ID;
+        private int sor;
+        private int oszlop;
 
 
 
 
 
 
-        public JatekCella(string pictureboxtag, int chance)
+        public JatekCella(int n,int m, int chance,int BN, int FN)
         {
-            ltag = pictureboxtag;
+            ltag = n+","+m;
+            sor = n;
+            oszlop = m;
             fu = new Fu(chance / 50);
-            allat = new Allat(ltag, chance);  //mindenhova garantáltan generál
-            Free = false;
-            isbunny = allat.IsBunny;
+
+            if (chance>50)
+            {
+                allat = new Allat(sor,oszlop, chance, BN, FN);
+                Free = false;
+                ID = allat.ID;
+            }
+            else
+            {
+                free = true;
+            }
+
+            
         }
         internal bool Free
         {

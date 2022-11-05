@@ -17,17 +17,17 @@ namespace RokaMoka
         int szelesseg;
         JatekCella[,] jmatrix;
         List<Allat> allatok = new List<Allat>();
-        public JatekMatrix(int sorok, int oszlopok, Panel panel)
+        public JatekMatrix(int sorok, int oszlopok, Panel panel,int BN, int FN)
         {
             sor = sorok;
             oszlop = oszlopok;
             magassag = panel.Height / sor;
             szelesseg = panel.Width / oszlop;
             jmatrix = new JatekCella[sor, oszlop];
-            JatekterGeneralas(panel);
+            JatekterGeneralas(panel, BN, FN);
         }
 
-        private void JatekterGeneralas(Panel panel)
+        private void JatekterGeneralas(Panel panel, int BN, int FN)
         {
             for (int n = 0; n < oszlop; n++)
             {
@@ -35,16 +35,16 @@ namespace RokaMoka
                 {
                     Label p = new Label();
                     tulajdonsagokBeallitasa(p, m, n);
-                    jmatrix[m, n] = new JatekCella(p.Tag.ToString(), r.Next(0, 99));
+                    jmatrix[m, n] = new JatekCella(n,m, r.Next(0, 100),BN,FN);
                     p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
-
                     if (!jmatrix[m, n].Free)
-                    {
-                        allatok.Add(jmatrix[m, n].allat);
-                        p.Image = jmatrix[m, n].allat.ID == "B" ?
-                        Image.FromFile(@"..\..\img\nyuszi1.png") :
-                        Image.FromFile(@"..\..\img\roka1.png");
-                    }
+                      {
+                            allatok.Add(jmatrix[m, n].allat);
+                            p.Image = jmatrix[m, n].allat.ID[0] == 'B' ?
+                            Image.FromFile(@"..\..\img\nyuszi1.png") :
+                            Image.FromFile(@"..\..\img\roka1.png");
+                      }
+                    
 
                     //can put pictures on like this
                     /* p.Image = r.Next(0, 2) == 1 ? 
@@ -83,6 +83,20 @@ namespace RokaMoka
                 int n = Convert.ToInt32(vs[1]);
                 jmatrix[m, n].fu.No();
                 p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
+                if (!jmatrix[m,n].Free)
+                {
+                    if (jmatrix[m, n].allat.HP<0)
+                    {
+                        jmatrix[m, n].allat.Death();
+                        jmatrix[m, n].Free=true;
+                        jmatrix[m, n].ID = "";
+                    };
+
+
+
+
+                    jmatrix[m, n].allat.HP--;
+                }
             }
         }
 

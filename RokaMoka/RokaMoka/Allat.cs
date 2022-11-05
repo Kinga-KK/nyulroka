@@ -13,11 +13,15 @@ namespace RokaMoka
         //ha nem kéne lekezelni/konstruktorban kezeljük le, akkor lehet sima publikus/internal automatikus tulajdonság
         // -> internal int HP { get; set; }
         //internal int HP; 
-        internal bool IsBunny; //todo: ami ezekből tulajdonság az kapjon { get; set; }-et
+        internal bool IsBunny;
         internal string ID;
         internal string ltag;
-        private int idseged;
-        
+        private static int idseged = 0;
+        internal static int dead = 0;
+        private int sor;
+        private int oszlop;
+
+
         internal int HP
         {
             get 
@@ -45,12 +49,20 @@ namespace RokaMoka
                 }
             }
         }
-
-        public Allat(string pictureboxtag, int chance)
+        internal static int Live
         {
-            ltag = pictureboxtag;
-            IsBunny = (chance - 20) > 0;
+            get
+            {
+                return idseged - dead;
+            }
+        }
+
+        public Allat(int n,int m, int chance,int BN, int FN)
+        {
+            IsBunny = chance < BN;
+            //IsBunny = (chance-20) > 50;
             HP = IsBunny ? 3 : 5;
+            IDmkr();
         }
         internal void IDmkr() //Id maker
         {
@@ -69,7 +81,7 @@ namespace RokaMoka
         {
             if (IsBunny==true)
             {
-                if (2>0)
+                if (sor<1)
                 {
 
                 }
@@ -92,10 +104,7 @@ namespace RokaMoka
         }
         internal void Death()
         {
-            if (HP<0)
-            {
-
-            }
+            dead++;
         }
 
 

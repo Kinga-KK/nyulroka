@@ -18,7 +18,10 @@ namespace RokaMoka
         //set maximum of numericupdowns to different values later
         int sor;
         int oszlop;
+        int BN;
+        int FN;
         JatekMatrix jatekMatrix;
+        internal Allat allat;
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +34,8 @@ namespace RokaMoka
                 elemekRejtese();
                 sor = Convert.ToInt32(sorok.Value);
                 oszlop = Convert.ToInt32(oszlopok.Value);
-                jatekMatrix = new JatekMatrix(sor, oszlop, panel);
+                BN = Convert.ToInt32(bunnynumber.Value);
+                jatekMatrix = new JatekMatrix(sor, oszlop, panel, BN, FN);
                 timer1.Enabled = true;
                 Start.Text = "Szünet";
                 running = true;
@@ -53,12 +57,15 @@ namespace RokaMoka
             //Start.Visible = false;
             oszlopok.Visible = false;
             sorok.Visible = false;
-            labelX.Visible = false;
+            bunnynumber.Visible = false;
+            label2.Visible = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = $"Eltelt idő: {++seconds}";
+            labelX.Text = $"Élő: {Allat.Live}";
+            label4.Text = $"Halott: {Allat.dead}";
             jatekMatrix.ujNap(panel);
         }
     }
