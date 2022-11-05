@@ -21,7 +21,6 @@ namespace RokaMoka
         int BN;
         int FN;
         JatekMatrix jatekMatrix;
-        internal Allat allat;
         public Form1()
         {
             InitializeComponent();

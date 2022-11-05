@@ -11,8 +11,8 @@ namespace RokaMoka
     class JatekMatrix
     {
         Random r = new Random();
-        int sor;
-        int oszlop;
+        internal static int sor;
+        internal static int oszlop;
         int magassag;
         int szelesseg;
         JatekCella[,] jmatrix;
@@ -76,7 +76,7 @@ namespace RokaMoka
 
         public void ujNap(Panel panel)
         {
-            foreach (Control p in panel.Controls)
+            foreach (Label p in panel.Controls)
             {
                 string[] vs = p.Tag.ToString().Trim().Split(',').ToArray();
                 int m = Convert.ToInt32(vs[0]);
@@ -91,11 +91,17 @@ namespace RokaMoka
                         jmatrix[m, n].Free=true;
                         jmatrix[m, n].ID = "";
                     };
+                    p.Image = jmatrix[m, n].allat.ID[0] == 'B' ?
+                            Image.FromFile(@"..\..\img\nyuszi1.png") :
+                            Image.FromFile(@"..\..\img\roka1.png");
 
 
-
-
+                    
                     jmatrix[m, n].allat.HP--;
+                }
+                else
+                {
+
                 }
             }
         }
