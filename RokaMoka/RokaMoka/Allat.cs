@@ -9,22 +9,16 @@ namespace RokaMoka
     class Allat
     {
         private int hp;
-        //ő nincsen hozzákötve a hp-hoz, ezért automatikusan legenerál magának egy privát adattagot.
-        //ha nem kéne lekezelni/konstruktorban kezeljük le, akkor lehet sima publikus/internal automatikus tulajdonság
-        // -> internal int HP { get; set; }
-        //internal int HP; 
         internal bool IsBunny;
         internal string ID;
-        internal string ltag;
+        //internal string ltag;
         private static int idseged = 0;
         internal static int dead = 0;
         private int sor;
         private int oszlop;
-        internal JatekCella jatekCella;
+        //internal JatekCella jatekCella;
         internal string[] szabadmezok = new string[25];
         internal string[] foglaltmezok = new string[25];
-
-
 
         internal int HP
         {
@@ -91,55 +85,105 @@ namespace RokaMoka
             if (IsBunny == true)
             {
                 #region Bunny
-                if (sor < 1)
+                if (sor == 0)
                 {
                     for (int i = sor; i < sor++; i++)
                     {
-                        if (oszlop < 1)
+                        if (oszlop == 0) //{0,0} left,up
                         {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (jatekCella.Free == true)
+                                if (JatekCella.free == true)
                                 {
-                                    szabadmezok[szmezo] = jatekCella.ltag;
+                                    szabadmezok[szmezo] = JatekCella.ltag;
                                     szmezo++;
                                 }
                                 else
                                 {
-                                    foglaltmezok[szmezo] = jatekCella.ltag;
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
                                     fmezo++;
                                 }
-                            }
                         }
-                        else if (oszlop+1==JatekMatrix.oszlop)
+                        else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
                         {
                                 for (int d = oszlop; d < oszlop++; d++)
                                 {
-                                    if (jatekCella.Free == true)
+                                    if (JatekCella.free == true)
                                     {
-                                        szabadmezok[szmezo] = jatekCella.ltag;
+                                        szabadmezok[szmezo] = JatekCella.ltag;
                                         szmezo++;
                                     }
                                     else
                                     {
-                                        foglaltmezok[szmezo] = jatekCella.ltag;
+                                        foglaltmezok[szmezo] = JatekCella.ltag;
                                         fmezo++;
                                     }
                                 }
 
                         }
-                        else
+                        else //{0,1-48} in-between
                         {
-                            for (int d = oszlop; d < oszlop++; d++)
+                            for (int d = oszlop; d < oszlop++; d++) 
                             {
-                                if (jatekCella.Free == true)
+                                if (JatekCella.free == true)
                                 {
-                                    szabadmezok[szmezo] = jatekCella.ltag;
+                                    szabadmezok[szmezo] = JatekCella.ltag;
                                     szmezo++;
                                 }
                                 else
                                 {
-                                    foglaltmezok[szmezo] = jatekCella.ltag;
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                if (sor == 0)
+                {
+                    for (int i = sor; i < sor++; i++)
+                    {
+                        if (oszlop == 0) //{0,0} left,up
+                        {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                        }
+                        else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
+                        {
+                                for (int d = oszlop; d < oszlop++; d++)
+                                {
+                                    if (JatekCella.free == true)
+                                    {
+                                        szabadmezok[szmezo] = JatekCella.ltag;
+                                        szmezo++;
+                                    }
+                                    else
+                                    {
+                                        foglaltmezok[szmezo] = JatekCella.ltag;
+                                        fmezo++;
+                                    }
+                                }
+
+                        }
+                        else //{0,1-48} in-between
+                        {
+                            for (int d = oszlop; d < oszlop++; d++) 
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
                                     fmezo++;
                                 }
                             }
@@ -151,34 +195,34 @@ namespace RokaMoka
                 {
                     for (int i = sor; i < sor++; i++)
                     {
-                        if (oszlop < 1)
+                        if (oszlop == 0) //{49,0) right up
                         {
                             for (int d = oszlop; d < oszlop++; d++)
                             {
-                                if (jatekCella.Free == true)
+                                if (JatekCella.free == true)
                                 {
-                                    szabadmezok[szmezo] = jatekCella.ltag;
+                                    szabadmezok[szmezo] = JatekCella.ltag;
                                     szmezo++;
                                 }
                                 else
                                 {
-                                    foglaltmezok[szmezo] = jatekCella.ltag;
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
                                     fmezo++;
                                 }
                             }
                         }
-                        else if (oszlop + 1 == JatekMatrix.oszlop)
+                        else if (oszlop + 1 == JatekMatrix.oszlop) //{49,49} right down
                         {
                             for (int d = oszlop; d < oszlop++; d++)
                             {
-                                if (jatekCella.Free == true)
+                                if (JatekCella.free == true)
                                 {
-                                    szabadmezok[szmezo] = jatekCella.ltag;
+                                    szabadmezok[szmezo] = JatekCella.ltag;
                                     szmezo++;
                                 }
                                 else
                                 {
-                                    foglaltmezok[szmezo] = jatekCella.ltag;
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
                                     fmezo++;
                                 }
                             }
@@ -186,36 +230,36 @@ namespace RokaMoka
                         }
                         else
                         {
-                            for (int d = oszlop; d < oszlop++; d++)
+                            for (int d = oszlop; d < oszlop++; d++) //{49,1-48} in-between
                             {
-                                if (jatekCella.Free == true)
+                                if (JatekCella.free == true)
                                 {
-                                    szabadmezok[szmezo] = jatekCella.ltag;
+                                    szabadmezok[szmezo] = JatekCella.ltag;
                                     szmezo++;
                                 }
                                 else
                                 {
-                                    foglaltmezok[szmezo] = jatekCella.ltag;
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
                                     fmezo++;
                                 }
                             }
                         }
                     }
                 }
-                else
+                else //{1-49,1-49} anywhere not border
                 {
                     for (int i = sor; i < sor++; i++)
                     {
                         for (int d = oszlop; d < oszlop++; d++)
                         {
-                            if (jatekCella.Free == true)
+                            if (JatekCella.free == true)
                             {
-                                szabadmezok[szmezo] = jatekCella.ltag;
+                                szabadmezok[szmezo] = JatekCella.ltag;
                                 szmezo++;
                             }
                             else
                             {
-                                foglaltmezok[szmezo] = jatekCella.ltag;
+                                foglaltmezok[szmezo] = JatekCella.ltag;
                                 fmezo++;
                             }
                         }
@@ -226,6 +270,373 @@ namespace RokaMoka
             else
             {
                 #region Fox
+                if (sor == 0)
+                {
+                    for (int i = sor; i < sor++; i++)
+                    {
+                        if (oszlop == 0) //{0,0} left,up
+                        {
+                            if (JatekCella.free == true)
+                            {
+                                szabadmezok[szmezo] = JatekCella.ltag;
+                                szmezo++;
+                            }
+                            else
+                            {
+                                foglaltmezok[szmezo] = JatekCella.ltag;
+                                fmezo++;
+                            }
+                        }
+                        if (oszlop == 1) //{0,1} left,up
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+                        {
+                            for (int d = oszlop; d < oszlop++; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else //{0,2-47} in-between
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                if (sor == 1)
+                {
+                    for (int i = sor; i < sor++; i++)
+                    {
+                        if (oszlop == 0) //{0,0} left,up
+                        {
+                            if (JatekCella.free == true)
+                            {
+                                szabadmezok[szmezo] = JatekCella.ltag;
+                                szmezo++;
+                            }
+                            else
+                            {
+                                foglaltmezok[szmezo] = JatekCella.ltag;
+                                fmezo++;
+                            }
+                        }
+                        if (oszlop == 1) //{0,1} left,up
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+                        {
+                            for (int d = oszlop; d < oszlop++; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else //{0,2-47} in-between
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                else if (sor + 1 == JatekMatrix.sor)
+                {
+                    for (int i = sor-1; i < sor++; i++)
+                    {
+                        if (oszlop == 0) //{0,0} left,up
+                        {
+                            if (JatekCella.free == true)
+                            {
+                                szabadmezok[szmezo] = JatekCella.ltag;
+                                szmezo++;
+                            }
+                            else
+                            {
+                                foglaltmezok[szmezo] = JatekCella.ltag;
+                                fmezo++;
+                            }
+                        }
+                        if (oszlop == 1) //{0,1} left,up
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+                        {
+                            for (int d = oszlop; d < oszlop++; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else //{0,2-47} in-between
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                else if (sor + 2 == JatekMatrix.sor+1)
+                {
+                    for (int i = sor - 2; i < sor++; i++)
+                    {
+                        if (oszlop == 0) //{0,0} left,up
+                        {
+                            if (JatekCella.free == true)
+                            {
+                                szabadmezok[szmezo] = JatekCella.ltag;
+                                szmezo++;
+                            }
+                            else
+                            {
+                                foglaltmezok[szmezo] = JatekCella.ltag;
+                                fmezo++;
+                            }
+                        }
+                        if (oszlop == 1) //{0,1} left,up
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+                        {
+                            for (int d = oszlop; d < oszlop++; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+
+                        }
+                        else //{0,2-47} in-between
+                        {
+                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            {
+                                if (JatekCella.free == true)
+                                {
+                                    szabadmezok[szmezo] = JatekCella.ltag;
+                                    szmezo++;
+                                }
+                                else
+                                {
+                                    foglaltmezok[szmezo] = JatekCella.ltag;
+                                    fmezo++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                else //{2-48,2-48} anywhere not border
+                {
+                    for (int i = sor-2; i < sor+2; i++)
+                    {
+                        for (int d = oszlop-2; d < oszlop+2; d++)
+                        {
+                            if (JatekCella.free == true)
+                            {
+                                szabadmezok[szmezo] = JatekCella.ltag;
+                                szmezo++;
+                            }
+                            else
+                            {
+                                foglaltmezok[szmezo] = JatekCella.ltag;
+                                fmezo++;
+                            }
+                        }
+                    }
+                }
                 #endregion
             }
 
@@ -233,7 +644,7 @@ namespace RokaMoka
         }
         internal void Mozog()
         {
-            //string[] szabadmezok = new string[9];
+            
             
         }
         internal void Sex()

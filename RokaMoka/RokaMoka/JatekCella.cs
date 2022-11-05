@@ -9,10 +9,10 @@ namespace RokaMoka
 {
     class JatekCella
     {
-        internal string ltag;
+        internal static string ltag;
         internal Fu fu;
         internal Allat allat;
-        private bool free;
+        internal static bool free;
         internal string ID;
         private int sor;
         private int oszlop;

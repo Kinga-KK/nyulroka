@@ -59,7 +59,7 @@ namespace RokaMoka
             0,
             0});
             this.sorok.Minimum = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
@@ -111,7 +111,7 @@ namespace RokaMoka
             0,
             0});
             this.oszlopok.Minimum = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
