@@ -12,10 +12,10 @@ namespace RokaMoka
         internal static string ltag;
         internal Fu fu;
         internal Allat allat;
-        internal static bool free;
+        internal bool free;
         internal string ID;
-        private int sor;
-        private int oszlop;
+        private readonly int sor;
+        private readonly int oszlop;
 
 
 
@@ -46,6 +46,17 @@ namespace RokaMoka
         {
             get { return free; }
             set { free = value; }
+        }
+        internal void MakeFree()
+        {
+            Free = true;
+            ID = "";
+
+        }
+        internal void MakeBusy(string id)
+        {
+            ID = id;
+            Free = false;
         }
 
     }

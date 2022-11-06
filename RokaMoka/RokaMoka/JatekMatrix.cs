@@ -15,8 +15,8 @@ namespace RokaMoka
         internal static int oszlop;
         int magassag;
         int szelesseg;
-        JatekCella[,] jmatrix;
-        List<Allat> allatok = new List<Allat>();
+        internal static JatekCella[,] jmatrix;
+        internal static List<Allat> allatok = new List<Allat>();
         public JatekMatrix(int sorok, int oszlopok, Panel panel,int BN, int FN)
         {
             sor = sorok;
@@ -81,28 +81,35 @@ namespace RokaMoka
                 string[] vs = p.Tag.ToString().Trim().Split(',').ToArray();
                 int m = Convert.ToInt32(vs[0]);
                 int n = Convert.ToInt32(vs[1]);
-                jmatrix[m, n].fu.No();
-                p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
-                if (!jmatrix[m,n].Free)
+                if (jmatrix[m,n].Free==true)
+                {
+                    jmatrix[m, n].fu.No();
+                    if (p.Image != null)
+                    {
+                        p.Image = null;
+                    }
+                }
+                else
                 {
                     if (jmatrix[m, n].allat.HP<0)
                     {
                         jmatrix[m, n].allat.Death();
-                        jmatrix[m, n].Free=true;
-                        jmatrix[m, n].ID = "";
-                    };
-                    p.Image = jmatrix[m, n].allat.ID[0] == 'B' ?
+                        jmatrix[m, n].MakeFree();
+                        allatok.Remove(allatok.Where(x => x.ID == jmatrix[m, n].allat.ID).First());
+                    }
+                    else
+                    {
+                        p.Image = jmatrix[m, n].allat.ID[0] == 'B' ?
                             Image.FromFile(@"..\..\img\nyuszi1.png") :
                             Image.FromFile(@"..\..\img\roka1.png");
+                        jmatrix[m, n].allat.Mozog();
 
 
-                    
+
                     jmatrix[m, n].allat.HP--;
+                    }
                 }
-                else
-                {
-
-                }
+                p.BackColor = fuSzinBeallitas(jmatrix[m, n].fu.TP);
             }
         }
 

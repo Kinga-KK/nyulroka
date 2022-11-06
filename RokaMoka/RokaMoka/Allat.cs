@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RokaMoka
 {
@@ -11,14 +7,14 @@ namespace RokaMoka
         private int hp;
         internal bool IsBunny;
         internal string ID;
-        //internal string ltag;
         private static int idseged = 0;
         internal static int dead = 0;
         private int sor;
         private int oszlop;
-        //internal JatekCella jatekCella;
-        internal string[] szabadmezok = new string[25];
-        internal string[] foglaltmezok = new string[25];
+        //internal string[] szabadmezok = new string[25];
+        //internal string[] foglaltmezok = new string[25];
+        internal Random r = new Random();
+        internal string ltag;
 
         internal int HP
         {
@@ -27,21 +23,24 @@ namespace RokaMoka
                 return hp;
             } 
             set
-            {   //ha nyuszi és 5-nél nagyobb hp-t kapna, akkor csak 5-öt kap, egyébként az értéket 
-                if(IsBunny && value > 5)
+            {
+
+                //hp = value;
+                //ha nyuszi és 5-nél nagyobb hp-t kapna, akkor csak 5-öt kap, egyébként az értéket 
+                if (IsBunny && value > 5)
                 {
                     hp = 5;
                 }
-                else if(IsBunny)
+                else if (IsBunny)
                 {
                     hp = value;
                 }
                 //mint a fenti, csak róka és 10-nél nem lehet nagyobb
-                if(!IsBunny && value > 10)
+                if (!IsBunny && value > 10)
                 {
                     hp = 10;
                 }
-                else if(!IsBunny)
+                else if (!IsBunny)
                 {
                     hp = value;
                 }
@@ -57,12 +56,14 @@ namespace RokaMoka
 
         public Allat(int n,int m, int chance,int BN, int FN)
         {
-            sor = n-1;
-            oszlop = m-1;
+            sor = n;
+            oszlop = m;
             IsBunny = chance < BN;
             //IsBunny = (chance-20) > 50;
             HP = IsBunny ? 3 : 5;
+            //hp = 5;
             IDmkr();
+            ltag = sor + "," + oszlop;
         }
         internal void IDmkr() //Id maker
         {
@@ -77,574 +78,1090 @@ namespace RokaMoka
                 idseged++;
             }
         }
-        private void Scan()
-        {
-            int szmezo = 0;
-            int fmezo = 0;
+        //private void Scan()
+        //{
+        //    int szmezo = 0;
+        //    int fmezo = 0;
             
-            if (IsBunny == true)
+        //    if (IsBunny == true)
+        //    {
+        //        #region Bunny
+        //        if (sor == 0)
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                }
+        //                else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                        for (int d = oszlop; d < oszlop++; d++)
+        //                        {
+        //                            if (JatekCella.free == true)
+        //                            {
+        //                                szabadmezok[szmezo] = JatekCella.ltag;
+        //                                szmezo++;
+        //                            }
+        //                            else
+        //                            {
+        //                                foglaltmezok[szmezo] = JatekCella.ltag;
+        //                                fmezo++;
+        //                            }
+        //                        }
+
+        //                }
+        //                else //{0,1-48} in-between
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++) 
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        if (sor == 0)
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                }
+        //                else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                        for (int d = oszlop; d < oszlop++; d++)
+        //                        {
+        //                            if (JatekCella.free == true)
+        //                            {
+        //                                szabadmezok[szmezo] = JatekCella.ltag;
+        //                                szmezo++;
+        //                            }
+        //                            else
+        //                            {
+        //                                foglaltmezok[szmezo] = JatekCella.ltag;
+        //                                fmezo++;
+        //                            }
+        //                        }
+
+        //                }
+        //                else //{0,1-48} in-between
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++) 
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else if (sor+1 == JatekMatrix.sor)
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{49,0) right up
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+        //                else if (oszlop + 1 == JatekMatrix.oszlop) //{49,49} right down
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++) //{49,1-48} in-between
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else //{1-49,1-49} anywhere not border
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                for (int d = oszlop; d < oszlop++; d++)
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        #endregion
+        //    }
+        //    else
+        //    {
+        //        #region Fox
+        //        if (sor == 0)
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //                if (oszlop == 1) //{0,1} left,up
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else //{0,2-47} in-between
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else if (sor == 1)
+        //        {
+        //            for (int i = sor; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //                if (oszlop == 1) //{0,1} left,up
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else //{0,2-47} in-between
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else if (sor + 1 == JatekMatrix.sor)
+        //        {
+        //            for (int i = sor-1; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //                if (oszlop == 1) //{0,1} left,up
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else //{0,2-47} in-between
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else if (sor + 2 == JatekMatrix.sor+1)
+        //        {
+        //            for (int i = sor - 2; i < sor++; i++)
+        //            {
+        //                if (oszlop == 0) //{0,0} left,up
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //                if (oszlop == 1) //{0,1} left,up
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+        //                {
+        //                    for (int d = oszlop; d < oszlop++; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+
+        //                }
+        //                else //{0,2-47} in-between
+        //                {
+        //                    for (int d = oszlop - 1; d < oszlop + 2; d++)
+        //                    {
+        //                        if (JatekCella.free == true)
+        //                        {
+        //                            szabadmezok[szmezo] = JatekCella.ltag;
+        //                            szmezo++;
+        //                        }
+        //                        else
+        //                        {
+        //                            foglaltmezok[szmezo] = JatekCella.ltag;
+        //                            fmezo++;
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else //{2-48,2-48} anywhere not border
+        //        {
+        //            for (int i = sor-2; i < sor+2; i++)
+        //            {
+        //                for (int d = oszlop-2; d < oszlop+2; d++)
+        //                {
+        //                    if (JatekCella.free == true)
+        //                    {
+        //                        szabadmezok[szmezo] = JatekCella.ltag;
+        //                        szmezo++;
+        //                    }
+        //                    else
+        //                    {
+        //                        foglaltmezok[szmezo] = JatekCella.ltag;
+        //                        fmezo++;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        #endregion
+        //    }
+
+
+        //}
+        internal void Mozog()
+        {
+            if (sor==0)
             {
-                #region Bunny
-                if (sor == 0)
+                if (oszlop==0)
                 {
-                    for (int i = sor; i < sor++; i++)
+                    if (r.Next(1, 3)%2==0)
                     {
-                        if (oszlop == 0) //{0,0} left,up
+                        if (JatekMatrix.allatok.Exists(x=>x.ltag!=(sor + "," + (oszlop+1))))
                         {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop+1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop+1].ID = ID;
+                            oszlop++;
                         }
-                        else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
                         {
-                                for (int d = oszlop; d < oszlop++; d++)
-                                {
-                                    if (JatekCella.free == true)
-                                    {
-                                        szabadmezok[szmezo] = JatekCella.ltag;
-                                        szmezo++;
-                                    }
-                                    else
-                                    {
-                                        foglaltmezok[szmezo] = JatekCella.ltag;
-                                        fmezo++;
-                                    }
-                                }
-
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                            sor++;
                         }
-                        else //{0,1-48} in-between
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
                         {
-                            for (int d = oszlop; d < oszlop++; d++) 
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                            sor++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop+1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop+1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop+1].ID = ID;
+                            oszlop++;
+                        }
+                    }
+                }
+                else if (oszlop==JatekMatrix.oszlop-1)
+                {
+                    if (r.Next(1, 3) % 2 == 0)
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop-1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop-1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop-1].ID = ID;
+                            oszlop--;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                            sor++;
+                        }
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                            sor++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop-1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop-1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop-1].ID = ID;
+                            oszlop--;
                         }
 
                     }
                 }
-                if (sor == 0)
+                else
                 {
-                    for (int i = sor; i < sor++; i++)
+                    if (r.Next(1, 3) % 2 == 0)
                     {
-                        if (oszlop == 0) //{0,0} left,up
+                        if (r.Next(1, 3) % 2 == 0)
                         {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                        }
-                        else if (oszlop+1==JatekMatrix.oszlop) //{0,49} left,down
-                        {
-                                for (int d = oszlop; d < oszlop++; d++)
-                                {
-                                    if (JatekCella.free == true)
-                                    {
-                                        szabadmezok[szmezo] = JatekCella.ltag;
-                                        szmezo++;
-                                    }
-                                    else
-                                    {
-                                        foglaltmezok[szmezo] = JatekCella.ltag;
-                                        fmezo++;
-                                    }
-                                }
-
-                        }
-                        else //{0,1-48} in-between
-                        {
-                            for (int d = oszlop; d < oszlop++; d++) 
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop+1))))
                             {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop+1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop+1].ID = ID;
+                                oszlop++;
                             }
-                        }
-
-                    }
-                }
-                else if (sor+1 == JatekMatrix.sor)
-                {
-                    for (int i = sor; i < sor++; i++)
-                    {
-                        if (oszlop == 0) //{49,0) right up
-                        {
-                            for (int d = oszlop; d < oszlop++; d++)
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
                             {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                                sor++;
                             }
-                        }
-                        else if (oszlop + 1 == JatekMatrix.oszlop) //{49,49} right down
-                        {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
                         }
                         else
                         {
-                            for (int d = oszlop; d < oszlop++; d++) //{49,1-48} in-between
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
                             {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                                sor++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop+1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop+1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop+1].ID = ID;
+                                oszlop++;
                             }
                         }
                     }
-                }
-                else //{1-49,1-49} anywhere not border
-                {
-                    for (int i = sor; i < sor++; i++)
+                    else
                     {
-                        for (int d = oszlop; d < oszlop++; d++)
+                        if (r.Next(1, 3) % 2 == 0)
                         {
-                            if (JatekCella.free == true)
+                            if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop-1))))
                             {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop-1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop-1].ID = ID;
+                                oszlop--;
                             }
-                            else
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor - 1) + "," + oszlop)))
                             {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor-1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor-1, oszlop].ID = ID;
+                                sor--;
                             }
+                        }
+                        else
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor+1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor+1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor+1, oszlop].ID = ID;
+                                sor++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop+1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop+1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop+1].ID = ID;
+                                oszlop++;
+                            }
+
                         }
                     }
                 }
-                #endregion
+            }
+            else if (sor==JatekMatrix.sor-1)
+            {
+                if (oszlop == 0)
+                {
+                    if (r.Next(1, 3) % 2 == 0)
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                            oszlop++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                            oszlop++;
+                        }
+                    }
+                }
+                else if (oszlop == JatekMatrix.oszlop - 1)
+                {
+                    if (r.Next(1, 3) % 2 == 0)
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                            oszlop--;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                            oszlop--;
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (r.Next(1, 3) % 2 == 0)
+                    {
+                        if (r.Next(1, 3) % 2 == 0)
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
+                            }
+                        }
+                        else
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (r.Next(1, 3) % 2 == 0)
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                                oszlop--;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor - 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor - 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor - 1, oszlop].ID = ID;
+                                sor--;
+                            }
+                        }
+                        else
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop + 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
+                            }
+
+                        }
+                    }
+                }
             }
             else
             {
-                #region Fox
-                if (sor == 0)
+                if (oszlop == 0)
                 {
-                    for (int i = sor; i < sor++; i++)
+                    if (r.Next(1, 3) % 2 == 0)
                     {
-                        if (oszlop == 0) //{0,0} left,up
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
                         {
-                            if (JatekCella.free == true)
-                            {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
-                            }
-                            else
-                            {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
-                            }
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                            oszlop++;
                         }
-                        if (oszlop == 1) //{0,1} left,up
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
                         {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
                         }
-                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
                         {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
                         }
-                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
                         {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                            oszlop++;
                         }
-                        else //{0,2-47} in-between
+                    }
+                }
+                else if (oszlop == JatekMatrix.oszlop - 1)
+                {
+                    if (r.Next(1, 3) % 2 == 0)
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
                         {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                            oszlop--;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                    }
+                    else
+                    {
+                        if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                            JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                            sor++;
+                        }
+                        else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
+                        {
+                            JatekMatrix.jmatrix[sor, oszlop].free = true;
+                            JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                            JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                            JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                            oszlop--;
                         }
 
                     }
                 }
-                if (sor == 1)
+                else
                 {
-                    for (int i = sor; i < sor++; i++)
+                    if (r.Next(1, 3) % 2 == 0)
                     {
-                        if (oszlop == 0) //{0,0} left,up
+                        if (r.Next(1, 3) % 2 == 0)
                         {
-                            if (JatekCella.free == true)
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
                             {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
                             }
-                            else
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
                             {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
                             }
                         }
-                        if (oszlop == 1) //{0,1} left,up
+                        else
                         {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
                             {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
                             }
-
-                        }
-                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != (sor + "," + (oszlop + 1))))
                             {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
-                        {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else //{0,2-47} in-between
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-                        }
-
-                    }
-                }
-                else if (sor + 1 == JatekMatrix.sor)
-                {
-                    for (int i = sor-1; i < sor++; i++)
-                    {
-                        if (oszlop == 0) //{0,0} left,up
-                        {
-                            if (JatekCella.free == true)
-                            {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
-                            }
-                            else
-                            {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
-                            }
-                        }
-                        if (oszlop == 1) //{0,1} left,up
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
-                        {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else //{0,2-47} in-between
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-                        }
-
-                    }
-                }
-                else if (sor + 2 == JatekMatrix.sor+1)
-                {
-                    for (int i = sor - 2; i < sor++; i++)
-                    {
-                        if (oszlop == 0) //{0,0} left,up
-                        {
-                            if (JatekCella.free == true)
-                            {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
-                            }
-                            else
-                            {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
-                            }
-                        }
-                        if (oszlop == 1) //{0,1} left,up
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else if (oszlop + 2 == JatekMatrix.oszlop + 1) //{0,48} left,down
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else if (oszlop + 1 == JatekMatrix.oszlop) //{0,49} left,down
-                        {
-                            for (int d = oszlop; d < oszlop++; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-
-                        }
-                        else //{0,2-47} in-between
-                        {
-                            for (int d = oszlop - 1; d < oszlop + 2; d++)
-                            {
-                                if (JatekCella.free == true)
-                                {
-                                    szabadmezok[szmezo] = JatekCella.ltag;
-                                    szmezo++;
-                                }
-                                else
-                                {
-                                    foglaltmezok[szmezo] = JatekCella.ltag;
-                                    fmezo++;
-                                }
-                            }
-                        }
-
-                    }
-                }
-                else //{2-48,2-48} anywhere not border
-                {
-                    for (int i = sor-2; i < sor+2; i++)
-                    {
-                        for (int d = oszlop-2; d < oszlop+2; d++)
-                        {
-                            if (JatekCella.free == true)
-                            {
-                                szabadmezok[szmezo] = JatekCella.ltag;
-                                szmezo++;
-                            }
-                            else
-                            {
-                                foglaltmezok[szmezo] = JatekCella.ltag;
-                                fmezo++;
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
                             }
                         }
                     }
+                    else
+                    {
+                        if (r.Next(1, 3) % 2 == 0)
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop - 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop - 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop - 1].ID = ID;
+                                oszlop--;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor - 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor - 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor - 1, oszlop].ID = ID;
+                                sor--;
+                            }
+                        }
+                        else
+                        {
+                            if (JatekMatrix.allatok.Exists(x => x.ltag != ((sor + 1) + "," + oszlop)))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor + 1, oszlop].free = false;
+                                JatekMatrix.jmatrix[sor + 1, oszlop].ID = ID;
+                                sor++;
+                            }
+                            else if (JatekMatrix.allatok.Exists(x => x.ltag == (sor + "," + (oszlop + 1))))
+                            {
+                                JatekMatrix.jmatrix[sor, oszlop].free = true;
+                                JatekMatrix.jmatrix[sor, oszlop].ID = "";
+                                JatekMatrix.jmatrix[sor, oszlop + 1].free = false;
+                                JatekMatrix.jmatrix[sor, oszlop + 1].ID = ID;
+                                oszlop++;
+                            }
+
+                        }
+                    }
                 }
-                #endregion
             }
-
-
-        }
-        internal void Mozog()
-        {
-            
+           
             
         }
         internal void Sex()
